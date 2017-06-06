@@ -42,27 +42,33 @@ function create() {
         fish.events.onInputDown.add(fish_click_listener, this, fish);
     }
 
-    text = game.add.text(game.world.height / 2, 16, '', { fill: '#ffffff' });
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+    text = game.add.text(0, 0, '', style);
+    text.setTextBounds(0, 0, game.world.width, game.world.height * 0.2)
 
-    //fishTile_091.png
+    game.input.onTap.add(onTap, this);
+
 }
 
 function update() {
     //  Collide the fish_group with itself
     game.physics.arcade.collide(fish_group);
+}
 
-    if (game.input.mousePointer.isDown)
-    {
+function onTap(pointer, doubleTap) {
         fish_group.children.forEach(function(fish) {
             game.physics.arcade.moveToPointer(fish, 20);
         });
+    counter += 1;
+    if (counter === 10) {
+        counter = 0;
+        console.log('10 taps');
     }
-
 }
 
 function fish_click_listener(fish) {
-    counter += 1;
-    text.text = "You killed " + counter + " fish!";
+    text.text = "You are a fish murderer.";
+
     fish.frameName = 'fishTile_091.png';
     fish.body.gravity.y = -50;
 
