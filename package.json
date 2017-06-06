@@ -1,0 +1,25 @@
+{
+  "name": "riverhorse",
+  "version": "1.0.0",
+  "description": "A river horse",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wufire/riverhorse.git"
+  },
+  "author": "wufire",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wufire/riverhorse/issues"
+  },
+  "homepage": "https://github.com/wufire/riverhorse#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.8",
+    "minimist": "^1.2.0",
+    "vinyl-ftp": "^0.6.0"
+  }
+}
