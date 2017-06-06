@@ -1,4 +1,19 @@
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var configuration = {
+'canvas_width_max' : 2048,
+'canvas_width' : 1000,
+'canvas_height_max' : 2048,
+'canvas_height' : 650,
+'scale_ratio' : 1,
+'aspect_ratio' : 1,
+};
+
+configuration.canvas_width = window.screen.availWidth * window.devicePixelRatio;
+configuration.canvas_height = window.screen.availHeight * window.devicePixelRatio;
+configuration.aspect_ratio = configuration.canvas_width / configuration.canvas_height;
+if (configuration.aspect_ratio < 1) configuration.scale_ratio = configuration.canvas_height / configuration.canvas_height_max;
+else configuration.scale_ratio = configuration.canvas_width / configuration.canvas_width_max;
+
+var game = new Phaser.Game(configuration.canvas_width, configuration.canvas_height, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 var fish_group;
 
@@ -48,6 +63,12 @@ function create() {
 
     game.input.onTap.add(onTap, this);
 
+    // Canvas Scaling
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.refresh();
+
+    fish_group.scale.set(configuration.scale_ratio);
 }
 
 function update() {
@@ -56,9 +77,9 @@ function update() {
 }
 
 function onTap(pointer, doubleTap) {
-        fish_group.children.forEach(function(fish) {
-            game.physics.arcade.moveToPointer(fish, 20);
-        });
+    fish_group.children.forEach(function(fish) {
+        game.physics.arcade.moveToPointer(fish, 20);
+    });
     counter += 1;
     if (counter === 10) {
         counter = 0;
