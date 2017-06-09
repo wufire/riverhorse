@@ -24,6 +24,7 @@ BasicGame.Preloader.prototype = {
 
         //	Here we load the rest of the assets our game needs.
         this.load.atlasXML('fish', 'images/fishSpritesheet@2.png', 'images/fishSpritesheet@2.xml')
+        this.load.image('sparkle', 'images/flash/flash00.png');
 
     },
 

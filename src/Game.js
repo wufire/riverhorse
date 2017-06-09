@@ -27,6 +27,7 @@ BasicGame.Game = function (game) {
 var click_counter = 0;
 var fish_group;
 var border_group;
+var emitter;
 
 BasicGame.Game.prototype = {
 
@@ -83,7 +84,14 @@ BasicGame.Game.prototype = {
         //         border_tile.body.immovable = true;
         //     }
         // }
-
+        emitter = this.game.add.emitter(
+            0,
+            0,
+            250);
+        emitter.makeParticles('sparkle', [0, 1, 2, 3, 4, 5]);
+        emitter.maxParticleScale = 0.25;
+        emitter.minParticleScale = 0.25;
+        emitter.gravity = 200;
     },
 
     update: function () {
@@ -113,6 +121,16 @@ BasicGame.Game.prototype = {
         if (click_counter === 10) {
             click_counter = 0;
             console.log('10 taps');
+        }
+
+        emitter.x = pointer.x;
+        emitter.y = pointer.y;
+
+        emitter.minParticleSpeed.setTo(-5000, -5000);
+        emitter.maxParticleSpeed.setTo(5000, 5000);
+        emitter.start(true, 400, null, 10);
+        if('vibrate' in window.navigator) {
+            window.navigator.vibrate(100);
         }
     },
 
